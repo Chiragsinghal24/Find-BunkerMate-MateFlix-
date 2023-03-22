@@ -8,7 +8,7 @@ const addData = async (e) => {
   const programme = document.getElementById("programme").value;
   const year = document.getElementById("year").value;
   const branch = document.getElementById("branch").value;
-  const response = await fetch("https://q46rw1-3000.csb.app/api/add", {
+  const response = await fetch("https://mateflix.onrender.com/api/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +16,7 @@ const addData = async (e) => {
     body: JSON.stringify({ name, phone, cgpa, programme, year, branch }),
   });
   const result = await response.json();
-  window.location.href = "https://q46rw1-3000.csb.app/result.html";
+  window.location.href = "https://mateflix.onrender.com/result.html";
 };
 
 form.addEventListener("submit", addData);
