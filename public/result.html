@@ -66,8 +66,8 @@
                         row.insertCell().innerHTML = student.cgpa;
                         row.insertCell().innerHTML = student.branch;
                         row.insertCell().innerHTML = student.year;
-                        let link = "https://wa.me/" + student.phone + `?text=Hi++I+am+${student.name}%2C+I+got+your+contact+from+BunkerMate.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F` + student.phone;
-                        let linkHtml = '<a class="add_btn" href="' + link + '"><b>+ Add <b><img src=\'wsap.png\'></a>';
+                        let link = "https://wa.me/" + student.phone + `?text=Hi+${student.name}%2C+I+got+your+contact+from+mateflix.onrender.com+I+was+planning+if+you'd+be+interested+in+being+my+roommate+this+semester%3F+Let+me+know+what+you+think%21`;
+                        let linkHtml = '<a class="add_btn" href="' + link + ' " target="_blank"><b>+ Add <b><img src=\'wsap.png\'></a>';
                         row.insertCell().innerHTML = linkHtml;
                     }
                 }
