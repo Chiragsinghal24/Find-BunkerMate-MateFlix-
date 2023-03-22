@@ -1,0 +1,15 @@
+POST http://localhost:3000/add
+Content-Type: application/json
+
+{
+  "name":"Vaibhav Kumar Singh",
+  "phone":"6378845965",
+  "cgpa":"5.76",
+  "programme":"BTECH",
+  "year":"2",
+  "branch":"CSE"
+}
+
+###
+
+GET http://localhost:3000/api/getData
