@@ -55,7 +55,7 @@
                 const studentTableBody = studentTable.getElementsByTagName("tbody")[0];
 
                 async function populateTable() {
-                    const response = await fetch("http://localhost:3000/api/getData");
+                    const response = await fetch("https://mateflix.onrender.com/api/getData");
                     const data = await response.json();
                     studentTableBody.innerHTML = "";
                     for (let i = 0; i < data.length; i++) {
@@ -66,7 +66,6 @@
                         row.insertCell().innerHTML = student.cgpa;
                         row.insertCell().innerHTML = student.branch;
                         row.insertCell().innerHTML = student.year;
-                        //https://wa.me/919988776655?text=Hi+name%2C+I+got+your+contact+from+bunkermate.github.io.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F+student.phone
                         let link = "https://wa.me/" + student.phone + `?text=Hi++I+am+${student.name}%2C+I+got+your+contact+from+BunkerMate.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F` + student.phone;
                         let linkHtml = '<a class="add_btn" href="' + link + '"><b>+ Add <b><img src=\'wsap.png\'></a>';
                         row.insertCell().innerHTML = linkHtml;
