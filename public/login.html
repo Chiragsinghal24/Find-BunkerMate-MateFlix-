@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Form</title>
+</head>
+
+<body>
+  <div class="background">
+    <div class="container">
+      <div class="screen">
+        <div class="screen-header">
+          <div class="screen-header-left">
+            <div class="screen-header-button close"></div>
+            <div class="screen-header-button maximize"></div>
+            <div class="screen-header-button minimize"></div>
+          </div>
+          <div class="screen-header-right">
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="screen-body-item left">
+            <div class="app-title">
+              <span>Login/</span>
+              <span>Register</span>
+            </div>
+          </div>
+          <form>
+          <div class="screen-body-item">
+            <div class="app-form">         
+              <div class="app-form-group">
+                <input class="app-form-control" placeholder="phone no" name="phone" id="phone" required>
+              </div>
+            </div>
+            <div class="app-form-group buttons">
+              <!-- <button class="app-form-button" id="rst">RESET</button> -->
+              <button class="app-form-button" id="sbmt"><a href='../'>REGISTER</a></button>
+              <button class="app-form-button" type="submit" id="sbmt">LOGIN</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    const loginForm = document.querySelector('form')
+    const handleLogin = async(e) => {
+      e.preventDefault()
+      const phone = document.querySelector('#phone').value
+      const response = await fetch('https://q46rw1-3000.csb.app/api/validate',{
+        method:'POST',
+        headers: {
+          "Content-Type":'application/json'
+        },
+        body: JSON.stringify({phone})
+      })
+      const data = await response.json()
+      if(data.success){
+        window.location.href='https://q46rw1-3000.csb.app/result.html'
+      } else{
+        alert("Seems like you haven't registered")
+        window.location.href='https://q46rw1-3000.csb.app/'
+      }
+    }
+    loginForm.addEventListener('submit', handleLogin)
+  </script>
+</body>
+
+</html>

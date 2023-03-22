@@ -1,46 +1,68 @@
-const dropdowns = document.querySelectorAll('.dropdown');
-dropdowns.forEach(dropdown => {
-    const select = dropdown.querySelector('.select');
-    const caret = dropdown.querySelector('.caret');
-    const menu = dropdown.querySelector('.menu');
-    const options = dropdown.querySelectorAll('.menu li');
-    const selected = dropdown.querySelector('.selected');
-    select.addEventListener('click', () => {
-        select.classList.toggle('select-clicked');
-        caret.classList.toggle('caret-rotate');
-        menu.classList.toggle('menu-open');
-    });
+import express from "express";
+import mongoose from "mongoose";
+import User from "./model/user.model.js";
+const app = express();
 
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            selected.innerText = option.innerText;
-            select.classList.remove('select-clicked');
-            caret.classList.remove('caret-rotate');
-            menu.classList.remove('menu-open');
-            options.forEach(option => {
-                option.classList.remove('active');
-            });
-            option.classList.add('active');
-        });
-    });
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
+app.post("/api/add", async (req, res) => {
+  const { name, phone, cgpa, programme, year, branch } = req.body;
+  try {
+    const user = await User.create({
+      name,
+      phone,
+      cgpa,
+      programme,
+      year,
+      branch,
+    });
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
+app.get("/api/getData", async (req, res) => {
+  try {
+    const user = await User.find();
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
 
+app.post("/api/validate", async (req, res) => {
+  try {
+    const { phone } = req.body;
+    const user = await User.findOne({ phone });
+    if (user) res.json({ success: true });
+    else res.json({ success: false });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
+mongoose.connect(
+  "mongodb+srv://admin:bunker123@cluster0.wlikjj0.mongodb.net/?retryWrites=true&w=majority"
+);
 
+const db = mongoose.connection;
 
-document.querySelectorAll(".dropdown")[0].style.padding = "10px 0px 5px 0px";
+db.on("error", () => {
+  console.log("Unable to connect to database");
+});
+db.on("open", () => {
+  console.log("Successfully connected to mongodb");
+});
 
-document.querySelectorAll(".dropdown")[1].style.padding = "10px 0px 5px 0px";
-
-document.querySelectorAll(".dropdown")[2].style.padding = "10px 0px 5px 0px";
-
-
-
-document.querySelectorAll(".dropdown")[0].style.margin = "10px 0px 0px 0px";
-
-document.querySelectorAll(".dropdown")[1].style.margin = "10px 0px 0px 0px";
-
-document.querySelectorAll(".dropdown")[2].style.margin = "10px 0px 15px 0px";
+app.listen(3000, () => {
+  console.log("App is running on port 3000");
+});
