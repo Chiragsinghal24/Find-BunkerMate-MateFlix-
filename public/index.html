@@ -31,7 +31,7 @@
               <span>Find Your</span>
               <span>Roommate</span>
             </div>
-            <div class="app-contact">Created By: Prashant & Chirag</div>
+            <div class="app-contact">Created By: Prashant, Chirag & Vaibhav</div>
           </div>
 
           <form id="newform">
@@ -39,27 +39,37 @@
             <div class="screen-body-item">
               <div class="app-form">
                 <div class="app-form-group">
-                  <input class="app-form-control" placeholder="NAME" id="name">
+                  <input class="app-form-control" placeholder="NAME" id="name" required>
                 </div>
                 <div class="app-form-group">
-                  <input class="app-form-control" placeholder="phone no" id="phone">
+                  <input class="app-form-control" placeholder="phone no" id="phone" required>
                 </div>
                 <div class="app-form-group">
-                  <input class="app-form-control" placeholder="CGPA" id="cgpa">
+                  <input class="app-form-control" placeholder="CGPA" id="cgpa" required>
                 </div>
-                <div class="app-form-group"></div>
-                <select name="programme" id="programme">
+                <div class="app-form-group">
+                <label for="programme"><img src="https://img.icons8.com/material/24/666666/circled-chevron-down--v1.png"/></label>
+                <select name="programme" id="programme" required>
+                  <option value="" disabled selected hidden>Programme</option>
                   <option value="B.Tech">B.Tech</option>
                   <option value="M.Tech">M.Tech</option>
                 </select>
-                <select name="year" id="year">
+                </div>
+                <div class="app-form-group">
+                <label for="programme"><img src="https://img.icons8.com/material/24/666666/circled-chevron-down--v1.png"/></label>
+                <select name="year" id="year" required>
+                  <option value="" disabled selected hidden>Year</option>
                   <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
                   <option value="5">5th Year</option>
                 </select>
+                </div>
+                <div class="app-form-group">
+                <label for="programme"><img src="https://img.icons8.com/material/24/666666/circled-chevron-down--v1.png"/></label>
                 <select name="branch" id="branch">
+                  <option value="" disabled selected hidden>Branch</option>
                   <option value="CSE">CSE</option>
                   <option value="IT">IT</option>
                   <option value="ECE">ECE</option>
@@ -69,6 +79,7 @@
                   <option value="Biomedical Eng.">Biomedical Eng.</option>
                   <option value="Biotechnology">Biotechnology</option>
                 </select>
+                </div>
               </div>
           </form>
           <div class="app-form-group buttons">
