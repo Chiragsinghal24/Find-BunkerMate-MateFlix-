@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Sorting JSON Data</title>
+    <title>Find BunkerMate</title>
     <link rel="stylesheet" href="style12.css">
 </head>
 
@@ -50,21 +50,13 @@
                 </tbody>
             </table>
             <script>
-                const studentData = [
-                    { "name": "Prashant", "phone": "918744969975", "cgpa": 8.5, "branch": "IT", "year": 2 },
-                    { "name": "Alice", "phone": "2345678901", "cgpa": 9.0, "branch": "ECE", "year": 3 },
-                    { "name": "Bob", "phone": "3456789012", "cgpa": 7.5, "branch": "ME", "year": 4 },
-                    { "name": "Charlie", "phone": "4567890123", "cgpa": 8.0, "branch": "CE", "year": 2 },
-                    { "name": "David", "phone": "5678901234", "cgpa": 9.5, "branch": "CSE", "year": 4 },
-                    { "name": "Eva", "phone": "6789012345", "cgpa": 7.0, "branch": "ECE", "year": 1 },
-                    { "name": "Frank", "phone": "7890123456", "cgpa": 8.0, "branch": "ME", "year": 3 },
-                    { "name": "Grace", "phone": "8901234567", "cgpa": 9.2, "branch": "CE", "year": 4 }
-                ];
 
                 const studentTable = document.getElementById("studentTable");
                 const studentTableBody = studentTable.getElementsByTagName("tbody")[0];
 
-                function populateTable(data) {
+                async function populateTable() {
+                    const response = await fetch("http://localhost:3000/api/getData");
+                    const data = await response.json();
                     studentTableBody.innerHTML = "";
                     for (let i = 0; i < data.length; i++) {
                         const student = data[i];
@@ -75,7 +67,7 @@
                         row.insertCell().innerHTML = student.branch;
                         row.insertCell().innerHTML = student.year;
                         //https://wa.me/919988776655?text=Hi+name%2C+I+got+your+contact+from+bunkermate.github.io.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F+student.phone
-                        let link = "https://wa.me/" + student.phone + "?text=Hi+name%2C+I+got+your+contact+from+bunkermate.github.io.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F" + student.phone;
+                        let link = "https://wa.me/" + student.phone + `?text=Hi++I+am+${student.name}%2C+I+got+your+contact+from+BunkerMate.+Will+you+add+me+as+your+roommate%3F+Check+my+details+here%3A+bunkermate.github.io%2F` + student.phone;
                         let linkHtml = '<a class="add_btn" href="' + link + '"><b>+ Add <b><img src=\'wsap.png\'></a>';
                         row.insertCell().innerHTML = linkHtml;
                     }
@@ -116,7 +108,7 @@
                 document.getElementById("year").addEventListener("change", filterData);
                 document.getElementById("branch").addEventListener("change", filterData);
 
-                populateTable(studentData);
+                populateTable();
             </script>
 </body>
 

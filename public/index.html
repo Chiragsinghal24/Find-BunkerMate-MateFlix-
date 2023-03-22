@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Form</title>
+</head>
+
+<body>
+  <div class="background">
+    <div class="container">
+      <div class="screen">
+        <div class="screen-header">
+          <div class="screen-header-left">
+            <div class="screen-header-button close"></div>
+            <div class="screen-header-button maximize"></div>
+            <div class="screen-header-button minimize"></div>
+          </div>
+          <div class="screen-header-right">
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="screen-body-item left">
+            <div class="app-title">
+              <span>Find Your</span>
+              <span>Roommate</span>
+            </div>
+            <div class="app-contact">Created By: Prashant & Chirag</div>
+          </div>
+
+          <form id="newform">
+
+            <div class="screen-body-item">
+              <div class="app-form">
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="NAME" id="name">
+                </div>
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="phone no" id="phone">
+                </div>
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="CGPA" id="cgpa">
+                </div>
+                <div class="app-form-group"></div>
+                <select name="programme" id="programme">
+                  <option value="B.Tech">B.Tech</option>
+                  <option value="M.Tech">M.Tech</option>
+                </select>
+                <select name="year" id="year">
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                  <option value="5">5th Year</option>
+                </select>
+                <select name="branch" id="branch">
+                  <option value="CSE">CSE</option>
+                  <option value="IT">IT</option>
+                  <option value="ECE">ECE</option>
+                  <option value="EE">EE</option>
+                  <option value="Civil Eng.">Civil Eng.</option>
+                  <option value="Mechanical Eng.">Mechanical Eng.</option>
+                  <option value="Biomedical Eng.">Biomedical Eng.</option>
+                  <option value="Biotechnology">Biotechnology</option>
+                </select>
+              </div>
+          </form>
+          <div class="app-form-group buttons">
+            <!-- <button class="app-form-button" id="rst">RESET</button> -->
+            <button id="add-btn" class="app-form-button" type="submit">SEND</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
