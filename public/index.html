@@ -43,7 +43,7 @@
                   <input class="app-form-control" placeholder="NAME" id="name" required>
                 </div>
                 <div class="app-form-group">
-                  <input class="app-form-control" placeholder="phone no" id="phone" required>
+                  <input class="app-form-control" placeholder="phone no" id="phone" pattern="^[6-9]\d{9}$" required>
                 </div>
                 <div class="app-form-group">
                   <input class="app-form-control" placeholder="CGPA" id="cgpa" required>
@@ -86,6 +86,8 @@
           <div class="app-form-group buttons">
             <button id="add-btn" class="app-form-button" type="submit"><a href="login.html">LOGIN</a></button>
             <button id="add-btn" class="app-form-button" type="submit">SEND</button>
+            <br>
+            <a href="login.html">Already registered? Login Instead</a>
           </div>
         </div>
       </div>

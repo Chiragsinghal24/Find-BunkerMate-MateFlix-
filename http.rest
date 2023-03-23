@@ -13,3 +13,20 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/getData
+
+###
+
+POST https://rjvkrb-3000.csb.app/api/delete
+Content-Type: application/json
+
+{
+  "name":"prashant"
+}
+
+###
+
+POST https://rjvkrb-3000.csb.app/api/deleteDuplicates
+
+###
+
+DELETE https://rjvkrb-3000.csb.app/api/deleteInvalid

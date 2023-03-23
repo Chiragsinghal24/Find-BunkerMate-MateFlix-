@@ -40,8 +40,9 @@
               </div>
             </div>
             <div class="app-form-group buttons">
-              <button class="app-form-button" id="sbmt"><a href='../'>REGISTER</a></button>
               <button class="app-form-button" type="submit" id="sbmt">LOGIN</button>
+              <br>
+              <a href="../">Haven't registered? Register now</a>
             </div>
           </div>
           </form>
@@ -55,7 +56,7 @@
     const handleLogin = async(e) => {
       e.preventDefault()
       const phone = document.querySelector('#phone').value
-      const response = await fetch('https://mateflix.onrender.com/api/validate',{
+      const response = await fetch('/api/validate',{
         method:'POST',
         headers: {
           "Content-Type":'application/json'
@@ -64,10 +65,10 @@
       })
       const data = await response.json()
       if(data.success){
-        window.location.href='https://mateflix.onrender.com/result.html'
+        window.location.href='./result.html'
       } else{
         alert("Seems like you haven't registered")
-        window.location.href='https://mateflix.onrender.com/index.html'
+        window.location.href='./'
       }
     }
     loginForm.addEventListener('submit', handleLogin)

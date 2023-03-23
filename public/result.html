@@ -10,10 +10,11 @@
     <main class="table">
         <section class="table__header">
             <ul>
+                <li id="results">0 Results</li>
                 <li>
                     <div class="dropdown">
                         <select id="year" name="year">
-                            <option value="all">All Years</option>
+                            <option value="">All Years</option>
                             <option value="1">1st Year</option>
                             <option value="2">2nd Year</option>
                             <option value="3">3rd Year</option>
@@ -24,11 +25,15 @@
                 <li>
                     <div class="dropdown">
                         <select id="branch" name="branch">
-                            <option value="all">All Branches</option>
-                            <option value="CSE">Computer Science</option>
-                            <option value="ECE">Electronics</option>
-                            <option value="ME">Mechanical</option>
-                            <option value="CE">Civil</option>
+                            <option value="">All Branches</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EE">EE</option>
+                            <option value="Civil Eng.">Civil Eng.</option>
+                            <option value="Mechanical Eng.">Mechanical Eng.</option>
+                            <option value="Biomedical Eng.">Biomedical Eng.</option>
+                            <option value="Biotechnology">Biotechnology</option>
                         </select>
                     </div>
                 </li>
@@ -53,11 +58,11 @@
 
                 const studentTable = document.getElementById("studentTable");
                 const studentTableBody = studentTable.getElementsByTagName("tbody")[0];
+                let data = []
 
-                async function populateTable() {
-                    const response = await fetch("https://mateflix.onrender.com/api/getData");
-                    const data = await response.json();
+                async function populateTable(data) {
                     studentTableBody.innerHTML = "";
+                    results.innerHTML = data.length + " Results";
                     for (let i = 0; i < data.length; i++) {
                         const student = data[i];
                         const row = studentTableBody.insertRow();
@@ -72,42 +77,30 @@
                     }
                 }
                 function filterData() {
-                    let yearValue = document.getElementById("year").value;
-                    let branchValue = document.getElementById("branch").value;
-                    let filteredData = studentData.filter(student => {
-                        if (yearValue === "all" && branchValue === "all") {
-                            return true;
+                    const year = document.getElementById("year").value;
+                    const branch = document.getElementById("branch").value;
+                    const filteredData = [];
+                    for (let i = 0; i < data.length; i++) {
+                        const student = data[i];
+                        if (year === "" || student.year === year) {
+                            if (branch === "" || student.branch === branch) {
+                                filteredData.push(student);
+                            }
                         }
-                        if (yearValue === "all" && branchValue !== "all") {
-                            return student.branch === branchValue;
-                        }
-                        if (yearValue !== "all" && branchValue === "all") {
-                            return student.year === parseInt(yearValue);
-                        }
-                        return student.year === parseInt(yearValue) && student.branch === branchValue;
-                    });
-                    filteredData.sort((a, b) => {
-                        if (a.year < b.year) {
-                            return -1;
-                        }
-                        if (a.year > b.year) {
-                            return 1;
-                        }
-                        if (a.cgpa > b.cgpa) {
-                            return -1;
-                        }
-                        if (a.cgpa < b.cgpa) {
-                            return 1;
-                        }
-                        return 0;
-                    });
+                    }
                     populateTable(filteredData);
                 }
 
                 document.getElementById("year").addEventListener("change", filterData);
                 document.getElementById("branch").addEventListener("change", filterData);
 
-                populateTable();
+                const fetchData = async () => {
+                    const response = await fetch("/api/getData");
+                    data = await response.json();
+                    populateTable(data);
+                }
+
+                fetchData();
             </script>
 </body>
 
