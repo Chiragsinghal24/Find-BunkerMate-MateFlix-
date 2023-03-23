@@ -25,8 +25,8 @@ Content-Type: application/json
 
 ###
 
-POST https://rjvkrb-3000.csb.app/api/deleteDuplicates
+DELETE https://mateflix.onrender.com/api/deleteDuplicates
 
 ###
 
-DELETE https://rjvkrb-3000.csb.app/api/deleteInvalid
+DELETE https://mateflix.onrender.com/api/deleteInvalid

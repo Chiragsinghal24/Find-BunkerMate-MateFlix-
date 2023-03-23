@@ -2,16 +2,24 @@ import express from "express";
 import mongoose from "mongoose";
 import User from "./model/user.model.js";
 import dotenv from "dotenv";
+import cors from "cors";
+import { rateLimit } from "express-rate-limit";
 dotenv.config();
 
-
 const app = express();
+app.use(cors({ origin: "https://mateflix.onrender.com/" }));
 
-//my edit
 app.use(express.static("public"));
 
+const limit = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000, // 24 hours
+  max: 10, // limit each IP to 100 requests per windowMs
+});
+
+app.use(limit);
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/login.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +36,11 @@ app.post("/api/add", async (req, res) => {
     }
     // Check if phone number is valid
     if (phone.length !== 10) {
+      res.status(400).json({ error: "Invalid phone number" });
+      return;
+    }
+    // Check if phone number is indian
+    if (!phone.match(/^[6-9]\d{9}$/)) {
       res.status(400).json({ error: "Invalid phone number" });
       return;
     }
@@ -102,7 +115,6 @@ app.delete("/api/deleteDuplicates", async (req,res)=>{
     // Delete all users with same phone number
     const users = await User.find();
     const phoneNumbers = users.map(user=>user.phone);
-    const uniquePhoneNumbers = [...new Set(phoneNumbers)];
     const duplicatePhoneNumbers = phoneNumbers.filter(phone=>phoneNumbers.indexOf(phone)!==phoneNumbers.lastIndexOf(phone));
     await User.deleteMany({phone:{$in:duplicatePhoneNumbers}});
     res.status(200).json({message:"Duplicate Users Deleted Successfully"});
@@ -118,6 +130,10 @@ app.delete("/api/deleteInvalid", async(req,res)=>{
     const invalidUsers = users.filter(user=>user.phone.length!==10);
     let invalidPhoneNumbers = invalidUsers.map(user=>user.phone);
     await User.deleteMany({phone:{$in:invalidPhoneNumbers}});
+    // Delete users with non-indian phone numbers using regex
+    const nonIndianUsers = users.filter(user=>!user.phone.match(/^[6-9]\d{9}$/));
+    let nonIndianPhoneNumbers = nonIndianUsers.map(user=>user.phone);
+    await User.deleteMany({phone:{$in:nonIndianPhoneNumbers}});
     // Delete users with invalid cgpa
     const invalidCgpaUsers = users.filter(user=>user.cgpa<0 || user.cgpa>10);
     let invalidCgpaPhoneNumbers = invalidCgpaUsers.map(user=>user.phone);
