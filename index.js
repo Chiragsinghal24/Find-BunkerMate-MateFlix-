@@ -67,7 +67,7 @@ app.post("/api/add", async (req, res) => {
     const user = await User.create({
       name,
       phone,
-      cgpa,
+      cgpa: Math.round(cgpa * 100) / 100,
       programme,
       year,
       branch,
