@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import User from "./model/user.model.js";
 const app = express();
 
+
+//my edit
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
