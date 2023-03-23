@@ -79,6 +79,10 @@ input {
   margin-right: auto;
 }
 
+#add-btn, #sbmt{
+  margin: 8px;
+}
+
 .screen-header-button {
   display: inline-block;
   width: 8px;
