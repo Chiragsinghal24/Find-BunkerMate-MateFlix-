@@ -4,11 +4,14 @@ import User from "./model/user.model.js";
 import dotenv from "dotenv";
 dotenv.config();
 
+
 const app = express();
+
+//my edit
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/login.html");
 });
 
 app.use(express.urlencoded({ extended: true }));

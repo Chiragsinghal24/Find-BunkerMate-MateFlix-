@@ -9,6 +9,7 @@ const addData = async (e) => {
   const year = document.getElementById("year").value;
   const branch = document.getElementById("branch").value;
   const response = await fetch("/api/add", {
+
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,6 +17,7 @@ const addData = async (e) => {
     body: JSON.stringify({ name, phone, cgpa, programme, year, branch }),
   });
   const result = await response.json();
+
   if (result.error) {
     alert(result.error);
     return;
