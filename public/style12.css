@@ -5,6 +5,17 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration:none;}
+
+.ppp{
+  color: #000;
+    background: #d5d1defe;
+    font-size: 16px;
+    border-radius: 6px;
+    padding: 0.35em 0.8em;
+}
+  
 
 
 .add_btn {
