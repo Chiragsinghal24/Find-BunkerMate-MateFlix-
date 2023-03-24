@@ -50,6 +50,17 @@ app.delete("/api/delete", async (req, res) => {
   }
 });
 
+app.delete("/api/deletePhone", async (req, res) => {
+  try {
+    const { phone } = req.body;
+    const users = await User.find({ phone });
+    await User.deleteMany({ phone });
+    res.status(200).json({message:"Users Deleted Successfully",users});
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 app.delete("/api/deleteDuplicates", async (req,res)=>{
   try {
     // Delete all users with same phone number
@@ -102,7 +113,6 @@ const limit = rateLimit({
   max: 20, // limit each IP to 100 requests per windowMs
 });
 
-app.use(limit);
 
 app.post("/api/add", async (req, res) => {
   const { name, phone, cgpa, programme, year, branch } = req.body;
